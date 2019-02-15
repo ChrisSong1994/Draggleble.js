@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { findDOMNode } from "react-dom";
-import "./index.css";
 import Draggle from "components/draggleable";
 
 // console.log(typeof React); // object
@@ -54,12 +53,6 @@ class Editer extends Component {
   render() {
     return (
       <div ref="wrap" className="content-wrap">
-        <div
-          className="dragger"
-          style={{ background: "blue", width: 100, height: 100 }}
-        >
-          <span className="resize-handle" />
-        </div>
         <div
           className="dragger"
           style={{ background: "blue", width: 100, height: 100 }}
