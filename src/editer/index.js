@@ -20,7 +20,7 @@ class Editer extends Component {
 
   componentDidMount() {
     const el = findDOMNode(this.refs.wrap);
-    this.draagle = new Draggle(el, {
+    window.draagle = this.draagle = new Draggle(el, {
       widgets: widgets,
       widget_selector: ".dragger",
       resizeable: {
@@ -49,18 +49,8 @@ class Editer extends Component {
     });
   }
 
-
   render() {
-    return (
-      <div ref="wrap" className="content-wrap">
-        <div
-          className="dragger"
-          style={{ background: "blue", width: 100, height: 100 }}
-        >
-          <span className="resize-handle" />
-        </div>
-      </div>
-    );
+    return <div ref="wrap" className="content-wrap" />;
   }
 }
 export default Editer;
