@@ -24,23 +24,26 @@ class Draggle {
   constructor(el, options) {
     this.el = el;
     this.options = _.merge({}, defaults, options);
-    this.widgets = {};
-    _.forEach(this.options.widgets, widget => {
-      this.widgets[widget.id] = widget;
-    });
+    this.scale = options.scale || 1; // 默认缩放为1
+    this.widgets = this.options.widgets;
     this.$document = $(document);
     this.$container = $(this.el); // 容器
     this.$player = null; // 选中组件
     this.isMoving = false;
     this.isResizing = false;
+    this.addWidgets(this.widgets);
     this.init();
   }
 
   // 初始化拖拽环境
   init() {
-    this.addWidgets(this.widgets);
     this.$widgets = this.$container.children(this.options.widget_selector);
     this.$resHandles = this.$container.find(this.options.resizeable.handle);
+    // 先解绑，避免重复绑定带来的多次触发副作用
+    this.$widgets.off();
+    this.$resHandles.off();
+    this.$document.off();
+
     // 监听document
     this.$document.on("mousemove", e => {
       if (this.isMoving) {
@@ -51,6 +54,7 @@ class Draggle {
         this.resizing(size);
       }
     });
+
     this.$document.on("mouseup", e => {
       if (this.isMoving) {
         const posix = this.getWidgetOffset(e);
@@ -66,28 +70,46 @@ class Draggle {
       }
     });
 
-    // 监听画布
-    this.$container.on("mousedown", e => {
-      const $target = $(e.target);
-      const className = $target.attr("class");
-      if (className === "dragger") {
-        this.$player = $target;
-        this.el_init_pos = this.get_actual_pos(this.$player);
-        this.mouse_init_pos = this.get_mouse_pos(e);
-        this.offset_pos = {
-          x: this.mouse_init_pos.left - this.el_init_pos.left,
-          y: this.mouse_init_pos.top - this.el_init_pos.top
-        };
+    this.$widgets.on("contextmenu", e => {
+      // 阻止浏览器默认右击事件
+      console.log("阻止浏览器默认右击事件");
+      return false;
+    });
+
+    this.$widgets.on("mousedown", e => {
+      e.stopPropagation();
+      // 这里用箭头函数避免this指向被替换（this始终保持指向Draggle实例）
+      this.$player = $(e.currentTarget);
+      this.el_init_pos = this.get_actual_pos(this.$player);
+      this.mouse_init_pos = this.get_mouse_pos(e);
+      this.offset_pos = {
+        x: this.mouse_init_pos.left - this.el_init_pos.left,
+        y: this.mouse_init_pos.top - this.el_init_pos.top
+      };
+      if (e.button === 0) {
         this.isMoving = true;
         this.dragStart();
-      } else if (className === "resize-handle") {
-        this.$player = $target.parent();
-        this.isResizing = true;
-        this.mouse_init_pos = this.get_mouse_pos(e);
-        this.el_init_size = this.get_actual_size(this.$player);
-        this.resizeStart();
+      } else if (e.button === 2) {
+        this.rightClick();
       }
     });
+
+    this.$resHandles.on("mousedown", e => {
+      // 右下角拖拽图标
+      e.stopPropagation();
+      this.$player = $(e.currentTarget).parent();
+      this.isResizing = true;
+      this.mouse_init_pos = this.get_mouse_pos(e);
+      this.el_init_size = this.get_actual_size(this.$player);
+      this.resizeStart();
+    });
+  }
+
+  // 右击事件
+  rightClick() {
+    if (this.options.click.rightClick) {
+      this.options.click.rightClick.call(this);
+    }
   }
 
   // 拖拽开始
