@@ -1,6 +1,10 @@
 ### Draggleble.js
 
 > a simple draggleble layout
+#### 启动 Draggleble
+``` npm install  ```
+``` npm run start ```
+然后访问9000端口
 
 #### 功能列表
 
