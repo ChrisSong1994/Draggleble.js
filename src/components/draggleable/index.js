@@ -17,7 +17,12 @@ const defaults = {
   //       console.log(datas);
   //     },
   //     onStop: () => {}
+  //   },
+  // click:{
+  //   rightClick:()=>{
+  //     console.log("右击")
   //   }
+  // }
 };
 
 class Draggle {
@@ -275,6 +280,7 @@ class Draggle {
       widget.id
     }"></div> <span class="resize-handle" /></div>`;
     this.$container.append(widgetDom);
+    this.init();
   }
 
   /**
@@ -288,7 +294,9 @@ class Draggle {
 
   // 删除组件
   removeWidegt(id) {
+    delete this.widgets[widget.id];
     this.$container.children(`#${id}`).remove();
+    this.init;
   }
 
   // 获取全部的组件

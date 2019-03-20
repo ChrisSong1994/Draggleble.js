@@ -26,6 +26,7 @@ const config = {
   resolve: {
     // 别名
     alias: {
+      src:path.join(__dirname, "src"),
       editer: path.join(__dirname, "src/editer"),
       components: path.join(__dirname, "src/components")
     },
