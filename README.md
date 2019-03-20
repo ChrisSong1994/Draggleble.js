@@ -48,5 +48,7 @@
       }
     });
 ```
+> 注意：dist里面的draggleble.js 包含了loadsh 和 jquery打包的代码，假如需要纯draggleble.js 代码，需要自己配置webpack代码分块打包
+
 #### 一个简单的可拉伸拖拽画布
 ![画布](https://github.com/song111/Draggleble.js/blob/master/public/image/%E7%94%BB%E5%B8%83.gif)

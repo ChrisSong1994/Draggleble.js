@@ -1,6 +1,6 @@
-const HtmlWebpackPlugin = require("html-webpack-plugin"); // 通过 npm 安装
+const HtmlWebpackPlugin = require("html-webpack-plugin"); 
 const path = require("path");
-const webpack = require("webpack"); // 用于访问内置插件
+const webpack = require("webpack");
 
 const config = {
   mode: "development",
@@ -18,7 +18,7 @@ const config = {
       {
         test: /\.js$/,
         use: "babel-loader",
-        include: /src/, // 只转化src目录下的js
+        include: /src/, 
         exclude: /node_modules/ // 排除掉node_modules，优化打包速度
       }
     ]
