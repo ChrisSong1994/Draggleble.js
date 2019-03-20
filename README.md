@@ -8,7 +8,7 @@
 - 组件的右键事件
 - 组件拖拽和拉伸
 
-#### Draggleble用法
+#### Draggleble 用法
 ```
  const el = findDOMNode(this.refs.wrap);
     window.draagle = this.draagle = new Draggle(el, {

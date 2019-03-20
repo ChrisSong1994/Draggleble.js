@@ -6,7 +6,7 @@ const config = {
   mode: "development",
   entry: "./src/main.js",
   output: {
-    filename: "index.js",
+    filename: "draggleble.js",
     path: path.resolve(__dirname, "dist")
   },
   module: {

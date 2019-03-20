@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { findDOMNode } from "react-dom";
-import Draggle from "components/draggleable";
+import Draggle from "components/draggleble";
 import { generateUUID } from "src/utils.js";
 
 // console.log(typeof React); // object
