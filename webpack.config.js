@@ -4,7 +4,7 @@ const webpack = require("webpack"); // 用于访问内置插件
 
 const config = {
   mode: "development",
-  entry: "./src/main.js",
+  entry: path.resolve(__dirname, "src/main.js"),
   output: {
     filename: "draggleble.js",
     path: path.resolve(__dirname, "dist")
@@ -26,14 +26,19 @@ const config = {
   resolve: {
     // 别名
     alias: {
-      src:path.join(__dirname, "src"),
+      src: path.join(__dirname, "src"),
       editer: path.join(__dirname, "src/editer"),
       components: path.join(__dirname, "src/components")
     },
     // 省略后缀
     extensions: [".js", ".jsx", ".json", ".css"]
   },
-  plugins: [new HtmlWebpackPlugin({ template: "./src/index.html" })]
+  plugins: [new HtmlWebpackPlugin({ template:path.join(__dirname, "src/index.html" )})],
+  devServer: {
+    contentBase: path.join(__dirname, "dist"),
+    compress: true,
+    port: 9000
+  }
 };
 
 module.exports = config;
