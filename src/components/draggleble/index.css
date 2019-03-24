@@ -12,6 +12,11 @@
   background: blue;
 }
 
+.selected{
+  border: 2px solid #fff;
+  box-sizing: border-box;
+}
+
 .resize-handle {
   position: absolute;
   width: 16px;

@@ -21,7 +21,10 @@ const defaults = {
   // click:{
   //   rightClick:()=>{
   //     console.log("右击")
-  //   }
+  //   },
+  // selectedClick: (id, player) => {
+  //   console.log(id, player);
+  // }
   // }
 };
 
@@ -34,6 +37,7 @@ class Draggle {
     this.$document = $(document);
     this.$container = $(this.el); // 容器
     this.$player = null; // 选中组件
+    this.selectedId = ""; // 选中组件ID
     this.isMoving = false;
     this.isResizing = false;
     this.addWidgets(this.widgets);
@@ -65,26 +69,25 @@ class Draggle {
         const posix = this.getWidgetOffset(e);
         this.dragStop(posix);
         this.isMoving = false;
-        this.$player = null;
       }
       if (this.isResizing) {
         const size = this.getWidgetSize(e);
         this.resizeStop(size);
         this.isResizing = false;
-        this.$player = null;
       }
     });
 
     this.$widgets.on("contextmenu", e => {
       // 阻止浏览器默认右击事件
-      console.log("阻止浏览器默认右击事件");
       return false;
     });
 
     this.$widgets.on("mousedown", e => {
       e.stopPropagation();
       // 这里用箭头函数避免this指向被替换（this始终保持指向Draggle实例）
-      this.$player = $(e.currentTarget);
+      this.clearPlayer($(e.currentTarget));
+      this.setPlayer($(e.currentTarget));
+      this.$player.addClass("selected");
       this.el_init_pos = this.get_actual_pos(this.$player);
       this.mouse_init_pos = this.get_mouse_pos(e);
       this.offset_pos = {
@@ -102,12 +105,42 @@ class Draggle {
     this.$resHandles.on("mousedown", e => {
       // 右下角拖拽图标
       e.stopPropagation();
-      this.$player = $(e.currentTarget).parent();
+      this.clearPlayer($(e.currentTarget).parent());
+      this.setPlayer($(e.currentTarget).parent());
+      this.$player.addClass("selected");
       this.isResizing = true;
       this.mouse_init_pos = this.get_mouse_pos(e);
       this.el_init_size = this.get_actual_size(this.$player);
       this.resizeStart();
     });
+
+    this.$container.on("mousedown", e => {
+      this.clearPlayer();
+    });
+  }
+
+  // 清除选中项
+  clearPlayer(player) {
+    if (this.$player && !player) {
+      this.$player.removeClass("selected");
+      this.$player = null;
+      this.selectedId = "";
+      this.options.click.selectedClick.call(this, "", null);
+    }
+  }
+
+  //获取选中项的id
+  setPlayer(player) {
+    let selectedID = player.find(".chart").attr("id");
+    if (this.selectedId !== selectedID) {
+      this.$player = player;
+      this.selectedId = player.find(".chart").attr("id");
+      this.options.click.selectedClick.call(
+        this,
+        this.selectedId,
+        this.$player
+      );
+    }
   }
 
   // 右击事件
@@ -142,7 +175,6 @@ class Draggle {
   }
   // 拖拽结束
   dragStop(pos) {
-    console.log(this.$player, pos);
     if (this.options.draggable.onStop) {
       this.options.draggable.onStop.call(this, pos);
     }
@@ -172,9 +204,8 @@ class Draggle {
   }
   // 拉伸结束
   resizeStop(size) {
-    console.log(this.$player, size);
     if (this.options.resizeable.onStop) {
-      this.options.resizeable.onStop.call(this);
+      this.options.resizeable.onStop.call(this,size);
     }
   }
 
