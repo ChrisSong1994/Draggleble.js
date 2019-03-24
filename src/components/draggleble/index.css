@@ -9,12 +9,13 @@
 .dragger {
   cursor: pointer;
   position: absolute;
-  background: blue;
+  background: #fff;
 }
 
 .selected{
-  border: 2px solid #fff;
+  border: 1px solid #000;
   box-sizing: border-box;
+  z-index: 1;
 }
 
 .resize-handle {

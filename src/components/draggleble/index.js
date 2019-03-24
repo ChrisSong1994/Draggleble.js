@@ -121,7 +121,7 @@ class Draggle {
 
   // 清除选中项
   clearPlayer(player) {
-    if (this.$player && !player) {
+    if (this.$player || !player) {
       this.$player.removeClass("selected");
       this.$player = null;
       this.selectedId = "";
