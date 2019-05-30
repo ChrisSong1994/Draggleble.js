@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { findDOMNode } from "react-dom";
 import Draggle from "components/draggleble";
-import { generateUUID } from "src/utils.js";
+import { generateUUID } from "src/utils";
 
 // console.log(typeof React); // object
 
@@ -52,8 +52,8 @@ class Editer extends Component {
         rightClick: () => {
           console.log("右击");
         },
-        selectedClick:(id,player)=>{
-          console.log(id,player)
+        selectedClick: (id, player) => {
+          console.log(id, player)
         }
       }
     });
@@ -69,12 +69,20 @@ class Editer extends Component {
       height: 100
     });
   }
+
+  // 删除组件
+  deleteWidget() {
+    let id = this.draagle.selectedId.split('_')[1]
+    this.draagle.removeWidegt(id)
+  }
+
+
   render() {
     return (
       <div>
         <div className="tool">
           <button onClick={this.addWidget.bind(this)}>添加</button> <br />
-          {/* <button>删除</button> */}
+          <button onClick={this.deleteWidget.bind(this)}>删除</button>
         </div>
         <div ref="wrap" className="content-wrap" />
       </div>

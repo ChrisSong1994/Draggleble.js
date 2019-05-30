@@ -1,4 +1,3 @@
-import _ from "lodash";
 import $ from "jquery";
 import "./index.css";
 const defaults = {
@@ -31,7 +30,7 @@ const defaults = {
 class Draggle {
   constructor(el, options) {
     this.el = el;
-    this.options = _.merge({}, defaults, options);
+    this.options = Object.assign({}, defaults, options);
     this.scale = options.scale || 1; // 默认缩放为1
     this.widgets = this.options.widgets;
     this.$document = $(document);
@@ -160,6 +159,7 @@ class Draggle {
       this.options.draggable.onStart.call(this);
     }
   }
+
   // 拖拽中
   dragging(pos) {
     if (this.$player === null) {
@@ -173,6 +173,7 @@ class Draggle {
       left: pos.x
     });
   }
+
   // 拖拽结束
   dragStop(pos) {
     if (this.options.draggable.onStop) {
@@ -189,6 +190,7 @@ class Draggle {
       this.options.resizeable.onStart.call(this);
     }
   }
+
   // 拉伸中
   resizing(size) {
     this.$player.css({
@@ -202,10 +204,11 @@ class Draggle {
       this.options.resizeable.onResize.call(this, size);
     }
   }
+
   // 拉伸结束
   resizeStop(size) {
     if (this.options.resizeable.onStop) {
-      this.options.resizeable.onStop.call(this,size);
+      this.options.resizeable.onStop.call(this, size);
     }
   }
 
@@ -278,6 +281,7 @@ class Draggle {
       top: e.pageY
     };
   }
+
   // 获取当前组件位置
   get_actual_pos($el) {
     return $el.offset();
@@ -307,25 +311,25 @@ class Draggle {
     const { top, left, width, height } = widget;
     let widgetDom = `<div class="dragger" id=${
       widget.id
-    } style="top:${top}px;left:${left}px;width:${width}px;height:${height}px;"><div class="chart" id="chart_${
+      } style="top:${top}px;left:${left}px;width:${width}px;height:${height}px;"><div class="chart" id="chart_${
       widget.id
-    }"></div> <span class="resize-handle" /></div>`;
+      }"></div> <span class="resize-handle" /></div>`;
     this.$container.append(widgetDom);
     this.init();
   }
 
   /**
-   *  @param object  组件参数
+   * @param {object} widgets  组件参数
    **/
   addWidgets(widgets) {
-    _.forEach(widgets, widget => {
-      this.addWidget(widget);
-    });
+    for (let key in widgets) {
+      this.addWidget(widgets[key]);
+    }
   }
 
   // 删除组件
   removeWidegt(id) {
-    delete this.widgets[widget.id];
+    delete this.widgets[id];
     this.$container.children(`#${id}`).remove();
     this.init;
   }
@@ -335,4 +339,5 @@ class Draggle {
     return this.widgets;
   }
 }
+
 export default Draggle;
