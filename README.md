@@ -7,9 +7,7 @@
 sudo npm install draggleble --save
 ``` 
 
-
 #### 功能列表
-
 - 组件的添加删除
 - 组件选中和取消
 - 组件的右键事件
@@ -47,8 +45,8 @@ sudo npm install draggleble --save
         }
       },
       click: {
-        rightClick: () => {
-          console.log("右击");
+         rightClick: (id) => {
+          console.log("右击", id)
         },
         selectedClick: (id, player) => {
           console.log(id, player)

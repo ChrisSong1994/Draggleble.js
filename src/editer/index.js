@@ -49,8 +49,8 @@ class Editer extends Component {
         }
       },
       click: {
-        rightClick: () => {
-          console.log("右击");
+        rightClick: (id) => {
+          console.log("右击", id)
         },
         selectedClick: (id, player) => {
           console.log(id, player)
