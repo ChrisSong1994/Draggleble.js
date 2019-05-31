@@ -19,9 +19,6 @@ if (pro) {
   )
 }
 
-
-
-
 module.exports = {
   mode: "development",
   entry: path.resolve(__dirname, "src/main.js"),

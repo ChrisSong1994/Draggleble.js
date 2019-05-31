@@ -4,14 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-<<<<<<< HEAD
     "start": "cross-env webpack-dev-server --open --mode development",
     "build": "cross-env npm run clean && webpack --mode production",
     "clean": "cross-env rm -rf dist && mkdir dist"
-=======
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack-dev-server --open"
->>>>>>> c0675f600df0b3295804c428e3c9a3ede9a25573
   },
   "repository": {
     "type": "git",
