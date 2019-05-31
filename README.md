@@ -2,11 +2,11 @@
 
 > a simple draggleble layout
 
-#### 启动 Draggleble
+####  使用 Draggleble
+```javascript
+sudo npm install draggleble --save
+``` 
 
-`npm install`
-`npm run start`
-然后访问 9000 端口
 
 #### 功能列表
 
@@ -17,8 +17,9 @@
 
 #### Draggleble 用法
 
-```
- const el = findDOMNode(this.refs.wrap);
+```javascript
+    import Draggle from 'draggleble'
+    const el = document.queryselector('#wrap');
     window.draagle = this.draagle = new Draggle(el, {
       widgets: widgets,
       widget_selector: ".dragger",
@@ -56,8 +57,5 @@
     });
 ```
 
-> 注意：dist 里面的 draggleble.js 包含了 loadsh 和 jquery 打包的代码，假如需要纯 draggleble.js 代码，需要自己配置 webpack 代码分块打包
+> 注意：example 里面的 draggleble.js 包含了 jquery 打包的代码，假如需要纯 draggleble.js 代码，需要自己配置 webpack 代码分块打包
 
-#### 一个简单的可拉伸拖拽画布
-
-![画布](https://github.com/song111/Draggleble.js/blob/master/public/image/%E7%94%BB%E5%B8%83.gif)

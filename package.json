@@ -1,12 +1,13 @@
 {
   "name": "draggleble",
-  "version": "1.0.0",
+  "version": "1.0.3",
   "description": "",
+  "keyword":"draggleble,drag",
   "main": "index.js",
   "scripts": {
     "start": "cross-env webpack-dev-server --open --mode development",
     "build": "cross-env npm run clean && webpack --mode production",
-    "clean": "cross-env rm -rf dist && mkdir dist"
+    "clean": "cross-env rm -rf example && mkdir example"
   },
   "repository": {
     "type": "git",

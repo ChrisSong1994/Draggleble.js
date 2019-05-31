@@ -1,5 +1,5 @@
-import $ from "jquery";
-import "./index.css";
+require('./index.css')
+const $ = require('jquery')
 const defaults = {
   //   widget_selector: ".dragger",
   //   draggable: {
