@@ -11,7 +11,8 @@ const widgets = {
     left: 50,
     top: 50,
     width: 100,
-    height: 100
+    height: 100,
+    content: `<b>组件1</b>`
   }
 };
 
@@ -72,7 +73,7 @@ class Editer extends Component {
 
   // 删除组件
   deleteWidget() {
-    let id = this.draagle.selectedId.split('_')[1]
+    let id = this.draagle.selectedId
     this.draagle.removeWidegt(id)
   }
 

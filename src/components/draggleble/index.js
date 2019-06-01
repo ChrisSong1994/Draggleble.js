@@ -45,6 +45,7 @@ class Draggle {
 
   // 初始化拖拽环境
   init() {
+    this.selectedId = "";
     this.$widgets = this.$container.children(this.options.widget_selector);
     this.$resHandles = this.$container.find(this.options.resizeable.handle);
     // 先解绑，避免重复绑定带来的多次触发副作用
@@ -121,19 +122,19 @@ class Draggle {
   // 清除选中项
   clearPlayer(player) {
     if (this.$player || !player) {
-      this.$player.removeClass("selected");
+      this.$player && this.$player.removeClass("selected");
       this.$player = null;
       this.selectedId = "";
-      this.options.click.selectedClick.call(this, "", null);
+      this.$player && this.options.click.selectedClick.call(this, "", null);
     }
   }
 
   //获取选中项的id
   setPlayer(player) {
-    let selectedID = player.find(".chart").attr("id");
+    let selectedID = player.attr("id");
     if (this.selectedId !== selectedID) {
       this.$player = player;
-      this.selectedId = player.find(".chart").attr("id");
+      this.selectedId = player.attr("id");
       this.options.click.selectedClick.call(
         this,
         this.selectedId,
@@ -308,12 +309,14 @@ class Draggle {
   // 添加组件
   addWidget(widget) {
     this.widgets[widget.id] = widget;
-    const { top, left, width, height } = widget;
-    let widgetDom = `<div class="dragger" id=${
-      widget.id
-      } style="top:${top}px;left:${left}px;width:${width}px;height:${height}px;"><div class="chart" id="chart_${
-      widget.id
-      }"></div> <span class="resize-handle" /></div>`;
+    const { top, left, width, height, content } = widget;
+    let widgetDom =
+      `<div class="dragger" id=${widget.id} style="top:${top}px;left:${left}px;width:${width}px;height:${height}px;">
+        <div class="chart" id="chart_${ widget.id}">
+          ${content ? content : ''}
+        </div> 
+        <span class="resize-handle" />
+      </div>`;
     this.$container.append(widgetDom);
     this.init();
   }
@@ -329,6 +332,7 @@ class Draggle {
 
   // 删除组件
   removeWidegt(id) {
+    if(!id) return 
     delete this.widgets[id];
     this.$container.children(`#${id}`).remove();
     this.init;
