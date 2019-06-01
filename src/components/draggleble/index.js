@@ -1,37 +1,37 @@
 import $ from "jquery";
 import "./index.css";
 const defaults = {
-  widget_selector: ".dragger",
-  draggable: {
-    onStart: (id, pos) => {
-      console.log(id, pos);
-    },
-    onDrag: (id, pos) => {
-      console.log(id, pos);
-    },
-    onStop: (id, pos) => {
-      console.log(id, pos);
-    }
-  },
-  resizeable: {
-    onStart: (id, size) => {
-      console.log(id, size);
-    },
-    onResize: (id, size) => {
-      console.log(id, size);
-    },
-    onStop: (id, size) => {
-      console.log(id, size);
-    },
-  },
-  click: {
-    rightClick: (id) => {
-      console.log("右击", id)
-    },
-    selectedClick: (id, player) => {
-      console.log(id, player);
-    }
-  }
+  // widget_selector: ".dragger",
+  // draggable: {
+  //   onStart: (id, pos) => {
+  //     console.log(id, pos);
+  //   },
+  //   onDrag: (id, pos) => {
+  //     console.log(id, pos);
+  //   },
+  //   onStop: (id, pos) => {
+  //     console.log(id, pos);
+  //   }
+  // },
+  // resizeable: {
+  //   onStart: (id, size) => {
+  //     console.log(id, size);
+  //   },
+  //   onResize: (id, size) => {
+  //     console.log(id, size);
+  //   },
+  //   onStop: (id, size) => {
+  //     console.log(id, size);
+  //   },
+  // },
+  // click: {
+  //   rightClick: (id) => {
+  //     console.log("右击", id)
+  //   },
+  //   selectedClick: (id, player) => {
+  //     console.log(id, player);
+  //   }
+  // }
 };
 
 class Draggle {

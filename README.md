@@ -98,6 +98,16 @@ sudo npm install draggleble --save
   }
 ```
 
+***获取组件信息***
+```javascript
+// 获取全部组件信息
+const widgets=this.draagle.widgets
+
+// 获取单个组件信息
+const widget=this.draagle.widgets[id]
+
+```
+
  **注意：example 里面的 draggleble.js 包含了 jquery 打包的代码，假如需要纯 draggleble.js 代码，需要自己配置 webpack 代码分块打包，假如有类似需求可以自行修改源码。**
 
 
