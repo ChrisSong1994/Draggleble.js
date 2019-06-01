@@ -1,5 +1,8 @@
 ### Draggleble.js
 
+***效果图***
+![draggleble](https://github.com/song111/font-end-question/blob/master/image/draggleble/draggleble.gif)
+
 > a simple draggleble layout
 
 ####  使用 Draggleble
@@ -96,4 +99,5 @@ sudo npm install draggleble --save
 ```
 
  **注意：example 里面的 draggleble.js 包含了 jquery 打包的代码，假如需要纯 draggleble.js 代码，需要自己配置 webpack 代码分块打包，假如有类似需求可以自行修改源码。**
+
 
