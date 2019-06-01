@@ -2,7 +2,7 @@
   "name": "draggleble",
   "version": "1.0.5",
   "description": "",
-  "keyword":"draggleble,drag",
+  "keyword": "draggleble,drag,js",
   "main": "index.js",
   "scripts": {
     "start": "cross-env webpack-dev-server --open --mode development",

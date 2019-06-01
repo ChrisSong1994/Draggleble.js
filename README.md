@@ -9,7 +9,6 @@ sudo npm install draggleble --save
 ``` 
 
 #### 功能列表
-
 - 组件的添加删除
 - 组件选中和取消
 - 组件的右键事件
@@ -41,33 +40,33 @@ sudo npm install draggleble --save
       widget_selector: ".dragger",
       resizeable: {
         handle: ".resize-handle",
-        onStart: () => {
-          console.log("start resizing");
+        onStart: (id, size) => {
+          console.log(id, size, 'resize start');
         },
-        onResize: datas => {
-          console.log(datas);
+        onResize: (id, size) => {
+          console.log(id, size, 'resizing');
         },
-        onStop: () => {
-          console.log("stop resizing");
-        }
+        onStop: (id, size) => {
+          console.log(id, size, 'resize end');
+        },
       },
       draggable: {
-        onStart: () => {
-          console.log("start moving");
+        onStart: (id, pos) => {
+          console.log(id, pos, 'move start');
         },
-        onDrag: datas => {
-          console.log(datas);
+        onDrag: (id, pos) => {
+          console.log(id, pos, 'moving');
         },
-        onStop: datas => {
-          console.log("stop moving", datas);
+        onStop: (id, pos) => {
+          console.log(id, pos, 'move end');
         }
       },
       click: {
-        rightClick: () => {   // 组件右键事件
-          console.log("右击");
+         rightClick: (id) => {
+          console.log("右击", id)
         },
-        selectedClick:(id,player)=>{  // 组件的选中
-          console.log(id,player)
+        selectedClick: (id, player) => {
+          console.log(id, player)
         }
       }
     });

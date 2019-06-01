@@ -28,30 +28,30 @@ class Editer extends Component {
       widget_selector: ".dragger",
       resizeable: {
         handle: ".resize-handle",
-        onStart: () => {
-          console.log("start resizing");
+        onStart: (id, size) => {
+          console.log(id, size, 'resize start');
         },
-        onResize: datas => {
-          console.log(datas);
+        onResize: (id, size) => {
+          console.log(id, size, 'resizing');
         },
-        onStop: () => {
-          console.log("stop resizing");
-        }
+        onStop: (id, size) => {
+          console.log(id, size, 'resize end');
+        },
       },
       draggable: {
-        onStart: () => {
-          console.log("start moving");
+        onStart: (id, pos) => {
+          console.log(id, pos, 'move start');
         },
-        onDrag: datas => {
-          console.log(datas);
+        onDrag: (id, pos) => {
+          console.log(id, pos, 'moving');
         },
-        onStop: datas => {
-          console.log("stop moving", datas);
+        onStop: (id, pos) => {
+          console.log(id, pos, 'move end');
         }
       },
       click: {
-        rightClick: () => {
-          console.log("右击");
+        rightClick: (id) => {
+          console.log("右击", id)
         },
         selectedClick: (id, player) => {
           console.log(id, player)
