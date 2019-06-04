@@ -21,7 +21,7 @@ if (pro) {
 
 module.exports = {
   mode: "development",
-  entry: path.resolve(__dirname, "src/main.js"),
+  entry: path.resolve(__dirname, "src/index.js"),
   output: {
     filename: "draggleble.js",
     path: path.resolve(__dirname, "example")
@@ -34,9 +34,13 @@ module.exports = {
       },
       {
         test: /\.js$/,
-        use: "babel-loader",
-        include: /src/,
-        exclude: /node_modules/
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-env']
+          }
+        }
       }
     ]
   },
@@ -53,6 +57,7 @@ module.exports = {
     contentBase: path.join(__dirname, "example"),
     compress: true,
     port: 9000
-  }
+  },
+  devtool: 'inline-source-map'
 };
 
