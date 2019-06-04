@@ -40,7 +40,6 @@ module.exports = {
   resolve: {
     alias: {
       src: path.join(__dirname, "src"),
-      editer: path.join(__dirname, "src/editer"),
       components: path.join(__dirname, "src/components")
     },
     extensions: [".js", ".jsx", ".json", ".css"]
