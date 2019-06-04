@@ -1,18 +1,11 @@
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const path = require("path");
 const webpack = require("webpack");
-
-const CleanWebpackPlugin = require('clean-webpack-plugin');// 清理模块
 const argv = require('yargs-parser')(process.argv.slice(2));  //  yargs-parser 模块用来获取命令行参数
 const pro = argv.mode == 'production' ? true : false;  //  区别是生产环境和开发环境
 
 let plu = [new HtmlWebpackPlugin({ template: path.join(__dirname, "src/index.html") })];
-if (pro) {
-  //  线上环境
-  plu.push(
-    new CleanWebpackPlugin('example')
-  )
-} else {
+if (!pro) {
   //  开发环境
   plu.push(
     new webpack.HotModuleReplacementPlugin()  // 热更新，热更新不是刷新
@@ -23,7 +16,7 @@ module.exports = {
   mode: "development",
   entry: path.resolve(__dirname, "src/index.js"),
   output: {
-    filename: "draggleble.js",
+    filename: "draggleble_[hash].js",
     path: path.resolve(__dirname, "example")
   },
   module: {
